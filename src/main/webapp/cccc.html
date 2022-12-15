@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+   /* 계산기 CSS 코드 구현 */
+   td {text-align: center;}
+   input {width: 95%;}
+   button {width: 90%;}
+</style>
+</head>
+<body>
+   <table border="1">
+      <tr>
+         <td colspan="4">
+            GDJ58 Calculator. 
+         </td>
+      </tr>
+      <tr>
+         <td colspan="4">
+            <input type="text" id="output" readonly="readonly">
+         </td>
+      </tr>
+      <tr>
+         <td colspan="2">
+            <button type="button" id="clear">Clear</button>
+         </td>
+         <td colspan="2">
+            <button type="button" id="enter">Enter</button>
+         </td>
+      </tr>
+      <tr>
+         <td>
+            <button type="button" id="num7" value="7">7</button>
+         </td>
+         <td>
+            <button type="button" id="num8" value="8">8</button>
+         </td>
+         <td>
+            <button type="button" id="num9" value="9">9</button>
+         </td>
+         <td>
+            <button type="button" id="add">+</button>
+         </td>   
+      </tr>
+      <tr>
+         <td>
+            <button type="button" id="num4" value="4">4</button>
+         </td>
+         <td>
+            <button type="button" id="num5" value="5">5</button>
+         </td>
+         <td>
+            <button type="button" id="num6" value="6">6</button>
+         </td>
+         <td>
+            <button type="button" id="subtract">-</button>
+         </td>   
+      </tr>
+      <tr>
+         <td>
+            <button type="button" id="num1" value="1">1</button>
+         </td>
+         <td>
+            <button type="button" id="num2" value="2">2</button>
+         </td>
+         <td>
+            <button type="button" id="num3" value="3">3</button>
+         </td>
+         <td>
+            <button type="button" id="multiply">*</button>
+         </td>   
+      </tr>
+      <tr>
+         <td colspan="2">
+            <button type="button" id="num0" value="0">0</button>
+         </td>
+         <td>
+            <button type="button" id="dot">.</button>
+         </td>
+         <td>
+            <button type="button" id="divide">/</button>
+         </td>   
+      </tr>
+      <tr>
+         <td colspan="4">
+            Copyright ⓒ GooDee Academy. All rights reserved.
+         </td>
+      </tr>
+   </table>
+   
+   <script>
+      // 계산기 JS 코드 구현
+      let beforeNum = 0;
+      let afterNum = 0;
+      let output = document.querySelector('#output');
+      
+      // 숫자
+      for(let i=0; i<10; i++) {
+         document.querySelector('#num'+i).addEventListener('click', function(){
+            if(output.value != '' || output.value != null) {
+               output.value = output.value+''+i;
+            } else {
+               document.querySelector('#output').value = i;
+            }
+         });
+      }
+      
+      // *
+      document.querySelector('#multiply').addEventListener('click', function(){
+         if(output.value != '') {
+            beforeNum = output.value;
+            output.value = output.value+'*';
+         }
+      });
+      
+      // -
+      document.querySelector('#subtract').addEventListener('click', function(){
+         if(output.value != '') {
+            beforeNum = output.value;
+            output.value = output.value+'-';
+         }
+      });
+      
+      // /
+      document.querySelector('#divide').addEventListener('click', function(){
+         if(output.value != '') {
+            beforeNum = output.value;
+            output.value = output.value+'/';
+         }
+      });
+      
+      // +
+      document.querySelector('#add').addEventListener('click', function(){
+         if(output.value != '') {
+            beforeNum = output.value;
+            output.value = output.value+'+';
+         }
+      });
+      
+      // .
+      document.querySelector('#dot').addEventListener('click', function(){
+         if(output.value != '') {
+            beforeNum = output.value;
+            output.value = output.value+'.';
+         }
+      });
+      
+      // clear
+      document.querySelector('#clear').addEventListener('click', function(){
+         output.value = '';
+      });
+      
+      // enter
+      document.querySelector('#enter').addEventListener('click', function(){
+         if(output.value != '') {
+            console.log(beforeNum.length);
+            afterNum = output.value.substr(beforeNum.length + 1);
+            console.log(afterNum);
+            console.log(output.value.substring(beforeNum.length, beforeNum.length+1));
+            
+            if(output.value.substring(beforeNum.length, beforeNum.length+1) == '*') {
+               output.value = Number(afterNum) * Number(beforeNum);
+               
+            } else if(output.value.substring(beforeNum.length, beforeNum.length+1) == '-') {
+               output.value = Number(beforeNum) - Number(afterNum);
+
+            } else if(output.value.substring(beforeNum.length, beforeNum.length+1) == '/') {
+               output.value = Number(beforeNum) / Number(afterNum);
+
+            } else if(output.value.substring(beforeNum.length, beforeNum.length+1) == '+') {
+               output.value = Number(afterNum) + Number(beforeNum);
+
+            }
+         }
+      });
+   </script>
+</body>
+</html>
