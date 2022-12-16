@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>newObj</title>
+	</head>
+	<body>
+		<!-- 자바스크립트에서 객체 만드는방법 -->
+		<script>
+			// 객체리터럴을 사용
+			let s1 = {
+						name:null
+						, grade:0
+						, age:0
+						, gender:null
+						, study:function() {
+									console.log('공부한다')
+								}
+			}; 
+			s1.name = '루피';
+			s1.grade = 7;
+			s1.age = 19;
+			s1.gender = '남';
+			console.log(s1.name);
+			s1.study();
+			
+			let s2 = {
+					name :null
+					, grade:0
+					, age:0
+					, gender:null
+					, study:function() {
+								console.log('공부한다')
+							}
+			}; 
+			
+			s2.name = '루피';
+			console.log(s2.name);
+			s2.study();
+			
+			// 2) 객체를 반환하는 함수를 이용한다.
+			let Student = function() { // 같은 방식이지만 이 방식은 맨위로 간다 어디에 있어도 제일 먼저 출력 function getStudent() {}
+				return {
+						name:null
+						, grade:0
+						, age:0
+						, gender:null
+						, study:function() {
+									console.log('공부한다')
+								}
+				}; 
+			};
+			
+			let s3 = Student(); // 자바라면 Student s3 = new Student();
+			s3.name = '나미';
+			console.log(s3.name);
+			s3.study();
+			
+			
+			// 3) 생성자함수를 이용한다. (Class랑은 전혀 상관x 자바스크립트에는 Class가 없다) 리턴이 없다 this를 쓴다. -> 객체를 생성할 공간(new연산자의 반환)이 필요하다.
+			// 위에 2개는 객체를 반환하는 함수이고 이 함수는 객체를 생성하는 함수이다.
+			let Student2 = function() { // this -> new연산자가 만들어낸 공간을 가리킨다.
+				this.name = null;
+				this.grade = 0;
+				this.age = 0;
+				this.gender = null;
+				this.study = function() {
+					console.log('공부한다');
+				};
+			};
+			
+			let s4 = Student2(); // 생성자함수는 new연산자와 같이 사용되어야 한다. new 연산자가 없으면 undefined값 반환
+			console.log(s4); // undefined
+			// console.log(s4.grade); 
+			// s4.study();
+			let s4_2 = new Student2();
+			s4_2.name = '쵸파';
+			console.log(s4_2.name);
+			s4_2.study();
+			
+			
+			// 4) 클래스 표현법을 사용한다.
+			class Student3 {
+				constructor() {
+					this.name = null;
+					this.grade = 0;
+					this.age = 0;
+					this.gender = null;
+					this.study = function() {
+						console.log('공부한다');
+					}
+				}
+			}; // -> 표현법은 4)이어도 결국 자바스크립트 내부적으로 3)번 형태로 바뀐다.
+			
+			let s5 = new Student3();
+			s5.name = '상디';
+			console.log(s5.name);
+			s5.study();
+			
+			let a = A();
+		</script>
+	</body>
+</html>

@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>calculator</title>
 <style>
 	/* 계산기 CSS 코드 구현 */
 	td {text-align: center;}
@@ -41,7 +41,7 @@
 				<button type="button" id="nine" value="9">9</button>
 			</td>
 			<td>
-				<button type="button" id="add">+</button>
+				<button type="button" id="add" value="+">+</button>
 			</td>	
 		</tr>
 		<tr>
@@ -92,10 +92,12 @@
 	
 	<script>
 		// 계산기 JS 코드 구현
-		let beforeOutput = 0;
-		let afterOutput = 0;
+		let beforeNumber = 0;
+		let afterNumber = 0;
 		let output = document.querySelector('#output');
+		let add = document.querySelector('#add');
 		
+
 		// 0
 		document.querySelector('#zero').addEventListener('click', function(){
 			if(output.value == '') {
@@ -187,32 +189,33 @@
 			}
 		});
 		
-		// dot
+		/* dot
 		document.querySelector('#dot').addEventListener('click', function(){
 			if(output.value == '') {
-				output.value = '.';
+				output.value = '';
 			} else if(output.value != '') {
-				beforeOutput = output.value;
+				beforeNumber = output.value;
 				output.value = output.value +''+ '.';
 			}
 		});
-		
-		// add
+		*/
+			
+		// add 
 		document.querySelector('#add').addEventListener('click', function(){
 			if(output.value == '') {
 				output.value = '';
 			} else if(output.value != '') {
-				beforeOutput = output.value;
+				beforeNumber = output.value;
 				output.value = output.value +''+ '+';
 			}
 		});
 		
-		// subtract
+		/*
 		document.querySelector('#subtract').addEventListener('click', function(){
 			if(output.value == '') {
 				output.value = '';
 			} else if(output.value != '') {
-				beforeOutput = output.value;
+				beforeNumber = output.value;
 				output.value = output.value +''+ '-';
 			}
 		});
@@ -222,7 +225,7 @@
 			if(output.value == '') {
 				output.value = '';
 			} else if(output.value != '') {
-				beforeOutput = output.value;
+				beforeNumber = output.value;
 				output.value = output.value +''+ '*';
 			}
 		});
@@ -232,11 +235,11 @@
 			if(output.value == '') {
 				output.value = '';
 			} else if(output.value != '') {
-				beforeOutput = output.value;
+				beforeNumber = output.value;
 				output.value = output.value +''+ '/';
 			}
 		});
-		
+		*/
 		// clear
 		document.querySelector('#clear').addEventListener('click', function(){
 			output.value = '';
@@ -244,9 +247,9 @@
 		
 		// enter
 		document.querySelector('#enter').addEventListener('click', function(){
-			console.log(beforeOutput);
+			console.log(beforeNumber);
 			
-			console.log(afterOutput);
+			console.log(afterNumber);
 		});
 		
 		

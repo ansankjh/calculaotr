@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>callBack</title>
+	</head>
+	<body>
+		<script>
+			// 객체지향 방식
+			let play = function() {
+				alert('play');
+			}
+			
+			let flag = false;
+			if(flag) {
+				play();
+			} else {
+				console.log('Not play!');
+			}
+			
+			// 함수프로그래밍 방식
+			let exePlay = function(flag, callback) {
+				if(flag) {
+					callback();
+				} else {
+					console.log('Not play!');
+				}
+			}
+			
+			exePlay(false, play);
+			exePlay(true, function() {alert('Have nice day!')});
+			// exePlay(true, ()=>{alert('Have nice day!')});
+			
+			/*
+				this
+				1) 함수에서는 window를 가리킨다.[전영역]
+				2) 생성자함수에서는 new연산의 결과 메모리 영역을 가리킨다.
+				3) 객체안의함수(멤버함수, 자바에선 메서드)에서는 함수가 소속된 객체를 가리킨다.
+				4) 화살표 함수 -> 위치가 어디에 있던 window(전영역)를 가리킨다
+			*/
+		</script>
+	</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>58기 자바스크립트 로또</title>
+		<style>
+		    div     {width:120px;height:120px;
+		            border:1px solid gray;
+		            display:table; float:left;
+		            margin-right:5px;}
+		   
+		    p       {font-size:50px;
+		            display:table-cell;
+		            text-align:center;
+		            vertical-align:middle;}
+		   
+		    nav     {clear:both;
+		            text-align:center;
+		            width:884px;}
+		   
+		    #red    {background-color:red;}
+		    #orange {background-color:orange;} 
+		    #yellow {background-color:yellow;} 
+		    #green  {background-color:green;}  
+		    #blue   {background-color:blue;}   
+		    #navy   {background-color:navy;}   
+		    #purple {background-color:purple;}     
+		</style>
+		<script>
+			// let : 블록범위를 가지는 지역변수를 선언
+			// load : 젤 마지막에 실행해달라는거
+		    window.addEventListener("load", function(){
+		        let start = document.querySelector("#start");
+		        let stop = document.querySelector("#stop");
+		       
+		        let redNum = document.querySelector("#red_num");
+		        let orangeNum = document.querySelector("#orange_num");
+		        let yellowNum = document.querySelector("#yellow_num");
+		        let greenNum = document.querySelector("#green_num");
+		        let blueNum = document.querySelector("#blue_num");
+		        let navyNum = document.querySelector("#navy_num");
+		        let purpleNum = document.querySelector("#purple_num");
+		       	// flag변수 없어도 프로그램은 작동되는데 있는 이유? 
+		       	// 변수 선언을 한번에 여러개 할수도 있다.
+		        let flag = false;
+		        let one,two,three,four,five,six,seven;
+		       	// start 버튼 클릭시 0.05초마다 1~45중에 랜덤으로 숫자 변경(setInterval)
+		       	// Math.random() <- 0보단크고 1보단 작은 숫자
+		       	// Math.floor <- 소숫값이 있을때 소수점 이하를 버린다. (0~0.9999 +1) *45
+		        start.addEventListener("click",function(){
+		            if(!flag){
+		                flag = true;
+		                one = setInterval(function(){
+		                    redNum.innerHTML = Math.floor(Math.random()*45)+1; 
+		                }, 50);
+		               
+		                two = setInterval(function(){
+		                    orangeNum.innerHTML = Math.floor(Math.random()*45)+1;  
+		                }, 50);
+		               
+		                three = setInterval(function(){
+		                    yellowNum.innerHTML = Math.floor(Math.random()*45)+1;  
+		                }, 50);
+		               
+		                four = setInterval(function(){
+		                    greenNum.innerHTML = Math.floor(Math.random()*45)+1;   
+		                }, 50);
+		               
+		                five = setInterval(function(){
+		                    blueNum.innerHTML = Math.floor(Math.random()*45)+1;
+		                }, 50);
+		               
+		                six = setInterval(function(){
+		                    navyNum.innerHTML = Math.floor(Math.random()*45)+1;
+		                }, 50);
+		               
+		                seven = setInterval(function(){
+		                    purpleNum.innerHTML = Math.floor(Math.random()*45)+1;  
+		                }, 50);
+		            }
+		        });
+		       	// stop 버튼 클릭 이벤트
+		       	// 1번 인터벌중단 & 빨간숫자 1/1000초(즉시)후에 멈춤
+		       	// 2번 인터벌중단 & 주황색숫자 1초후에 멈춤
+		       	// 3번 인터벌중단 & 노란색숫자 2초후에 멈춤
+		       	// 4번 인터벌중단 & 초록색숫자 3초후에 멈춤
+		       	// 5번 인터벌중단 & 파란색숫자 4초후에 멈춤
+		       	// 6번 인터벌중단 & navy색 5초후에 멈춤
+		       	// 7번 인터벌줃난 & 보라색숫자 6초후에 멈춤
+		        stop.addEventListener("click", function(){
+		            if(flag) {
+		                let result = lotto(7); // slice(0, n) 0부터 시작해서 n번째 전까지 (0,7) -> 0, 1, 2, 3, 4, 5, 6
+		                setTimeout(function(){ // setTimeout(function(), ? ) 함수를 ?초후에 정지
+		                    clearInterval(one); // 인터벌 중단코드
+		                    redNum.innerHTML = result[0];
+		                }, 1);
+		               
+		                setTimeout(function(){
+		                    clearInterval(two);
+		                    orangeNum.innerHTML = result[1];
+		                }, 1000);
+		               
+		                setTimeout(function(){
+		                    clearInterval(three);
+		                    yellowNum.innerHTML = result[2];
+		                }, 2000);
+		               
+		                setTimeout(function(){
+		                    clearInterval(four);
+		                    greenNum.innerHTML = result[3];
+		                }, 3000);
+		               
+		                setTimeout(function(){
+		                    clearInterval(five);
+		                    blueNum.innerHTML = result[4];
+		                }, 4000);
+		               
+		                setTimeout(function(){
+		                    clearInterval(six);
+		                    navyNum.innerHTML = result[5];
+		                }, 5000);
+		               
+		                setTimeout(function(){
+		                    clearInterval(seven);
+		                    purpleNum.innerHTML = result[6];
+		                    flag = false;
+		                }, 6000);
+		            }
+		        });
+		    });
+		   
+		    function lotto(n){ // 이런식의 함수선언은 제일 먼저 실행 되는 방식의 선언
+		    	// 45개의 자리를 가진 Array 선언
+		    	// 45개 자리에 i를 1부터 45까지 저장
+		    	// 로또 총 숫자의 개수는 45개다
+		        let arr = new Array(45);
+		        for(let i=0; i<arr.length; i++){
+		            arr[i] = i+1;
+		        }
+		        // 로또 공 섞는 알고리즘
+		       	// 0번자리의 숫자를 temp변수에 저장해둔다.
+		       	// ran변수에 1~45 랜덤숫자를 저장한다.
+		       	// 랜덤한 자리의 숫자를 0번 자리에 저장한다.
+		       	// 0번자리의 숫자를 저장해뒀던 temp를 랜덤한 자리에 저장한다.
+		        for(let j=0; j<10000; j++){
+		            let temp = arr[0];
+		            let ran = Math.floor(Math.random()*45);
+		            arr[0] = arr[ran];
+		            arr[ran] = temp;
+		        }
+		        // slice 0번자리부터 n번자리 전까지만 나타낸다.
+		        return arr.slice(0, n);
+		    }
+		   
+		//  let test = lotto(7);
+		//  console.log(test);
+		</script>
+	</head>
+	<body>
+		<!-- p태그 : 한문단을 만들때 쓰는 약자 -->
+	    <h1>로또 생성기</h1>
+	    <div id="red"><p id="red_num">0</p></div>
+	    <div id="orange"><p id="orange_num">0</p></div>
+	    <div id="yellow"><p id="yellow_num">0</p></div>
+	    <div id="green"><p id="green_num">0</p></div>
+	    <div id="blue"><p id="blue_num">0</p></div>
+	    <div id="navy"><p id="navy_num">0</p></div>
+	    <div id="purple"><p id="purple_num">0</p></div>
+	    <nav>
+	        <input type="button" value="start" id="start">
+	        <input type="button" value="stop" id="stop">
+	    </nav>
+	</body>
+</html>

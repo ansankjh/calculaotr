@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	/* 계산기 CSS 코드 구현 */
+	td {text-align: center;}
+	input {width: 95%;}
+	button {width: 90%;}
+</style>
+</head>
+<body>
+	<table border="1">
+		<tr>
+			<td colspan="4">
+				GDJ58 Calculator. 
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4">
+				<input type="text" id="output" >
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4">
+				<input type="text" id="temp" readonly="readonly"><!-- 임시저장 변수 -->
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<button type="button" id="clear">Clear</button>
+			</td>
+			<td colspan="2">
+				<button type="button" id="enter">Enter</button>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<button type="button" id="no7" value="7">7</button>
+			</td>
+			<td>
+				<button type="button" id="no8" value="8">8</button>
+			</td>
+			<td>
+				<button type="button" id="no9" value="9">9</button>
+			</td>
+			<td>
+				<button type="button" id="add">+</button>
+			</td>	
+		</tr>
+		<tr>
+			<td>
+				<button type="button" id="no4" value="4">4</button>
+			</td>
+			<td>
+				<button type="button" id="no5" value="5">5</button>
+			</td>
+			<td>
+				<button type="button" id="no6" value="6">6</button>
+			</td>
+			<td>
+				<button type="button" id="subtract">-</button>
+			</td>	
+		</tr>
+		<tr>
+			<td>
+				<button type="button" id="no1" value="1">1</button>
+			</td>
+			<td>
+				<button type="button" id="no2" value="2">2</button>
+			</td>
+			<td>
+				<button type="button" id="no3" value="3">3</button>
+			</td>
+			<td>
+				<button type="button" id="multiply">*</button>
+			</td>	
+		</tr>
+		<tr>
+			<td colspan="2">
+				<button type="button" id="no0" value="0">0</button>
+			</td>
+			<td>
+				<button type="button" id="dot" value=".">.</button>
+			</td>
+			<td>
+				<button type="button" id="divide">/</button>
+			</td>	
+		</tr>
+		<tr>
+			<td colspan="4">
+				Copyright ⓒ GooDee Academy. All rights reserved.
+			</td>
+		</tr>
+	</table>
+		
+	
+	<script>
+		// 계산기 JS 코드 구현
+		//받아오는값
+		let output = document.querySelector('#output');
+		 //임시저장값
+		let temp = document.querySelector('#temp');
+		
+		//숫자 0~9까지
+		for(let i=0; i<10; i++)
+		{
+			document.querySelector("#no"+i).addEventListener('click',function()
+					{
+						output.value = output.value + document.querySelector("#no"+i).value;
+					});
+		}
+		
+		//연산기호
+		// '+'
+		document.querySelector('#add').addEventListener('click',function()
+									{
+										//첫번째 입력값이 숫자가 아닌 다른것이 오는걸 방지
+										if((output.value == '' &&  temp.value =='') ||
+											output.value.slice(0)=='+' || output.value.slice(0)=='-' || 
+											output.value.slice(0)=='*' || output.value.slice(0)=='/' || 
+											output.value.slice(0)=='.')
+										{
+											alert('숫자부터 입력하세요');
+											output.value ='';
+											output.focus();
+											return;
+										}
+										
+										//연산자 중복입력 방지
+										if(temp.value.slice(-1)=='+')
+										{
+											alert('같은 연산자는 연속으로 사용할 수 없습니다.');
+											temp.value = temp.value+''; 
+											output.focus();
+											return;
+										}
+										//다른 연산자 입력시 연산자 변경
+										else if(temp.value.slice(-1)=='-' || temp.value.slice(-1)=='*' || temp.value.slice(-1)=='/')
+										{
+											temp.value = temp.value.slice(0,temp.value.length-1) + "+";
+											//console.log(temp.value.slice(0,temp.value.length-1)+" 다른기호일때 +로 바뀌는지");
+											return;
+										}
+										
+										//계산 결과값으로 연산하기위해
+										if(output.value=='' && temp.value != '')
+										{
+											output.value = temp.value;
+										}
+										temp.value = output.value + "+";
+										output.value = '';
+										
+										/* 
+											console.log(temp.value);
+											console.log(temp.value.slice(0,temp.value.length-1));//숫자만 추출
+											console.log(temp.value.slice(-1));//기호만 추출
+											console.log(temp.value.substr(temp.value.length-1,1)+"끝에서 두번째 자리만 추출");//기호만 추출 
+										*/
+									});
+		// '-'
+		document.querySelector('#subtract').addEventListener('click',function()
+									{
+										//첫번째 입력값이 숫자가 아닌 다른것이 오는걸 방지
+										if((output.value == '' &&  temp.value =='') ||
+											output.value.slice(0)=='+' || output.value.slice(0)=='-' || 
+											output.value.slice(0)=='*' || output.value.slice(0)=='/' || 
+											output.value.slice(0)=='.')
+										{
+											alert('숫자부터 입력하세요');
+											output.value ='';
+											output.focus();
+											return;
+										}
+										
+										//연산자 중복입력 방지
+										if(temp.value.slice(-1)=='-')
+										{
+											alert('같은 연산자는 연속으로 사용할 수 없습니다.');
+											temp.value = temp.value+''; 
+											output.focus();
+											return;
+										}
+										//다른 연산자 입력시 연산자 변경
+										else if(temp.value.slice(-1)=='+' || temp.value.slice(-1)=='*' || temp.value.slice(-1)=='/')
+										{
+											temp.value = temp.value.slice(0,temp.value.length-1) + "-";
+											return;
+										}
+										
+										
+										
+                                        //계산 결과값으로 연산하기위해
+										if(output.value=='' && temp.value != '')
+										{
+											output.value = temp.value;
+										}
+										
+										temp.value = output.value + "-";
+										output.value = '';
+										
+										//console.log(temp.value.substr(temp.value.length-1,1)+"끝에서 두번째 자리만 추출");//기호만 추출
+									});
+		// '*'
+		document.querySelector('#multiply').addEventListener('click',function()
+									{
+										
+										//첫번째 입력값이 숫자가 아닌 다른것이 오는걸 방지
+										if((output.value == '' &&  temp.value =='') ||
+											output.value.slice(0)=='+' || output.value.slice(0)=='-' || 
+											output.value.slice(0)=='*' || output.value.slice(0)=='/' || 
+											output.value.slice(0)=='.')
+										{
+											alert('숫자부터 입력하세요');
+											output.value ='';
+											output.focus();
+											return;
+										}
+			
+										//연산자 중복입력 방지
+										if(temp.value.slice(-1)=='*')
+										{
+											alert('같은 연산자는 연속으로 사용할 수 없습니다.');
+											temp.value = temp.value+''; 
+											output.focus();
+											return;
+										}
+										//다른 연산자 입력시 연산자 변경
+										else if(temp.value.slice(-1)=='-' || temp.value.slice(-1)=='+' || temp.value.slice(-1)=='/')
+										{
+											temp.value = temp.value.slice(0,temp.value.length-1) + "*";
+											return;
+										}
+										
+										//계산 결과값으로 연산하기위해
+										if(output.value=='' && temp.value != '')
+										{
+											output.value = temp.value;
+										}
+										
+										temp.value = output.value + "*";
+										output.value = '';
+									});
+		// '/'
+		document.querySelector('#divide').addEventListener('click',function()
+									{
+										//첫번째 입력값이 숫자가 아닌 다른것이 오는걸 방지
+										if((output.value == '' &&  temp.value =='') ||
+											output.value.slice(0)=='+' || output.value.slice(0)=='-' || 
+											output.value.slice(0)=='*' || output.value.slice(0)=='/' || 
+											output.value.slice(0)=='.')
+										{
+											alert('숫자부터 입력하세요');
+											output.value ='';
+											output.focus();
+											return;
+										}
+			
+										//연산자 중복입력 방지
+										if(temp.value.slice(-1)=='/')
+										{
+											alert('같은 연산자는 연속으로 사용할 수 없습니다.');
+											temp.value = temp.value+''; 
+											output.focus();
+											return;
+										}
+										//다른 연산자 입력시 연산자 변경
+										else if(temp.value.slice(-1)=='-' || temp.value.slice(-1)=='*' || temp.value.slice(-1)=='+')
+										{
+											temp.value = temp.value.slice(0,temp.value.length-1) + "/";
+											return;
+										}
+										
+										//계산 결과값으로 연산하기위해
+										if(output.value=='' && temp.value != '')
+										{
+											output.value = temp.value;
+										}
+										
+										temp.value = output.value + "/";
+										output.value = '';
+									});
+		// '.'
+		document.querySelector('#dot').addEventListener('click',function()
+									{
+										//첫번째 입력값이 숫자가 아닌 다른것이 오는걸 방지
+										if((output.value == '' &&  temp.value =='') || output.value == '' ||
+											output.value.slice(0)=='+' || output.value.slice(0)=='-' || 
+											output.value.slice(0)=='*' || output.value.slice(0)=='/' || 
+											output.value.slice(0)=='.')
+										{
+											alert('숫자부터 입력하세요');
+											output.value ='';
+											output.focus();
+											return;
+										}
+										output.value = output.value + document.querySelector('#dot').value;
+									});
+		
+		//클리어 & 계산하기
+		document.querySelector('#clear').addEventListener('click',function()
+										{
+											output.value = '';
+											temp.value = '';
+										});
+		document.querySelector('#enter').addEventListener('click',function()
+										{
+											if(output.value != '' && temp.value.slice(-1) == '+') //더하기값 넘어오면
+											{
+												temp.value = Number(temp.value.slice(0,temp.value.length-1)) + Number(output.value);
+											}
+											else if(output.value != '' && temp.value.slice(-1) == '-')//빼기값 넘어오면
+											{
+												temp.value = Number(temp.value.slice(0,temp.value.length-1)) - Number(output.value);
+											}
+											else if(output.value != '' && temp.value.slice(-1) == '*')//곱하기값 넘어오면
+											{
+												temp.value = Number(temp.value.slice(0,temp.value.length-1)) * Number(output.value);
+											}
+											else if(output.value != '' && temp.value.slice(-1) == '/')//나누기값 넘어오면
+											{
+												temp.value = Number(temp.value.slice(0,temp.value.length-1)) / Number(output.value);
+											}
+											output.value = '';
+										});
+	</script>
+</body>
+</html>
