@@ -32,13 +32,13 @@
 		</tr>
 		<tr>
 			<td>
-				<button type="button" id="seven" value="7">7</button>
+				<button type="button" id="number7" value="7">7</button>
 			</td>
 			<td>
-				<button type="button" id="eight" value="8">8</button>
+				<button type="button" id="number8" value="8">8</button>
 			</td>
 			<td>
-				<button type="button" id="nine" value="9">9</button>
+				<button type="button" id="number9" value="9">9</button>
 			</td>
 			<td>
 				<button type="button" id="add" value="+">+</button>
@@ -46,13 +46,13 @@
 		</tr>
 		<tr>
 			<td>
-				<button type="button" id="four" value="4">4</button>
+				<button type="button" id="number4" value="4">4</button>
 			</td>
 			<td>
-				<button type="button" id="five" value="5">5</button>
+				<button type="button" id="number5" value="5">5</button>
 			</td>
 			<td>
-				<button type="button" id="six" value="6">6</button>
+				<button type="button" id="number6" value="6">6</button>
 			</td>
 			<td>
 				<button type="button" id="subtract">-</button>
@@ -60,13 +60,13 @@
 		</tr>
 		<tr>
 			<td>
-				<button type="button" id="one" value="1">1</button>
+				<button type="button" id="number1" value="1">1</button>
 			</td>
 			<td>
-				<button type="button" id="two" value="2">2</button>
+				<button type="button" id="number2" value="2">2</button>
 			</td>
 			<td>
-				<button type="button" id="three" value="3">3</button>
+				<button type="button" id="number3" value="3">3</button>
 			</td>
 			<td>
 				<button type="button" id="multiply">*</button>
@@ -74,7 +74,7 @@
 		</tr>
 		<tr>
 			<td colspan="2">
-				<button type="button" id="zero" value="0">0</button>
+				<button type="button" id="number0" value="0">0</button>
 			</td>
 			<td>
 				<button type="button" id="dot">.</button>
@@ -92,170 +92,14 @@
 	
 	<script>
 		// 계산기 JS 코드 구현
-		let beforeNumber = 0;
-		let afterNumber = 0;
-		let output = document.querySelector('#output');
-		let add = document.querySelector('#add');
-		
-
-		// 0
-		document.querySelector('#zero').addEventListener('click', function(){
-			if(output.value == '') {
-				output.value = document.querySelector('#zero').value;	
-			} else if (output.value != '') {
-				output.value = output.value +''+ document.querySelector('#zero').value;
-			}
-			
-		});
-		
-		// 1
-		document.querySelector('#one').addEventListener('click', function(){
-			if(output.value == '') {
-				output.value = document.querySelector('#one').value;	
-			} else if (output.value != '') {
-				output.value = output.value +''+ document.querySelector('#one').value;
-			}
-		});
-		
-		// 2
-		document.querySelector('#two').addEventListener('click', function(){
-			if(output.value == '') {
-				output.value = document.querySelector('#two').value;	
-			} else if (output.value != '') {
-				output.value = output.value +''+ document.querySelector('#two').value;
-			}
-		});
-		
-		// 3
-		document.querySelector('#three').addEventListener('click', function(){
-			if(output.value == '') {
-				output.value = document.querySelector('#three').value;	
-			} else if (output.value != '') {
-				output.value = output.value +''+ document.querySelector('#three').value;
-			}
-		});
-		
-		// 4
-		document.querySelector('#four').addEventListener('click', function(){
-			if(output.value == '') {
-				output.value = document.querySelector('#four').value;	
-			} else if (output.value != '') {
-				output.value = output.value +''+ document.querySelector('#four').value;
-			}
-		});
-		
-		// 5
-		document.querySelector('#five').addEventListener('click', function(){
-			if(output.value == '') {
-				output.value = document.querySelector('#five').value;	
-			} else if (output.value != '') {
-				output.value = output.value +''+ document.querySelector('#five').value;
-			}
-		});
-		
-		// 6
-		document.querySelector('#six').addEventListener('click', function(){
-			if(output.value == '') {
-				output.value = document.querySelector('#six').value;	
-			} else if (output.value != '') {
-				output.value = output.value +''+ document.querySelector('#six').value;
-			}
-		});
-		
-		// 7
-		document.querySelector('#seven').addEventListener('click', function(){
-			if(output.value == '') {
-				output.value = document.querySelector('#seven').value;	
-			} else if (output.value != '') {
-				output.value = output.value +''+ document.querySelector('#seven').value;
-			}
-		});
-		
-		// 8
-		document.querySelector('#eight').addEventListener('click', function(){
-			if(output.value == '') {
-				output.value = document.querySelector('#eight').value;	
-			} else if (output.value != '') {
-				output.value = output.value +''+ document.querySelector('#eight').value;
-			}
-		});
-		
-		// 9
-		document.querySelector('#nine').addEventListener('click', function(){
-			if(output.value == '') {
-				output.value = document.querySelector('#nine').value;	
-			} else if (output.value != '') {
-				output.value = output.value +''+ document.querySelector('#nine').value;
-			}
-		});
-		
-		/* dot
-		document.querySelector('#dot').addEventListener('click', function(){
-			if(output.value == '') {
-				output.value = '';
-			} else if(output.value != '') {
-				beforeNumber = output.value;
-				output.value = output.value +''+ '.';
-			}
-		});
-		*/
-			
-		// add 
-		document.querySelector('#add').addEventListener('click', function(){
-			if(output.value == '') {
-				output.value = '';
-			} else if(output.value != '') {
-				beforeNumber = output.value;
-				output.value = output.value +''+ '+';
-			}
-		});
-		
-		/*
-		document.querySelector('#subtract').addEventListener('click', function(){
-			if(output.value == '') {
-				output.value = '';
-			} else if(output.value != '') {
-				beforeNumber = output.value;
-				output.value = output.value +''+ '-';
-			}
-		});
-		
-		// multiply
-		document.querySelector('#multiply').addEventListener('click', function(){
-			if(output.value == '') {
-				output.value = '';
-			} else if(output.value != '') {
-				beforeNumber = output.value;
-				output.value = output.value +''+ '*';
-			}
-		});
-		
-		// divide
-		document.querySelector('#divide').addEventListener('click', function(){
-			if(output.value == '') {
-				output.value = '';
-			} else if(output.value != '') {
-				beforeNumber = output.value;
-				output.value = output.value +''+ '/';
-			}
-		});
-		*/
-		// clear
-		document.querySelector('#clear').addEventListener('click', function(){
-			output.value = '';
-		});
-		
-		// enter
-		document.querySelector('#enter').addEventListener('click', function(){
-			console.log(beforeNumber);
-			
-			console.log(afterNumber);
-		});
-		
-		
-		
-		
-		
+		// 숫자버튼 누르면 output화면에 숫자 나오게
+		// i를 0~9 num0~num9
+		let num = new Array(10);
+		for(let i=0; i<num.length; i++) {
+			document.querySelector('#number'+i).addEventListener('click', function() {
+				output.value
+			});
+		};
 		
 		
 	
